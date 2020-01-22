@@ -29,10 +29,28 @@ function findSteps(id) {
 		}
 }
 
-function add(schemeData) {}
+function add(schemeData) {
+	if(schemeData) {
+		return db("schemes").insert(schemeData)
+			.then(([id]) => {
+				return findById(id);
+			});
+	}
+	return null
+}
 
 function addStep(stepData, id) {}
 
-function update(changes, id) {}
+function update(changes, id) {
+	if(changes && id) {
+		return db("schemes").where("id", id).update(changes);
+	}
+	return null
+}
 
-function remove(id)
+function remove(id) {
+	if(id) {
+		return db("schemes").where("id", id).del();
+	}
+	return null;
+}
